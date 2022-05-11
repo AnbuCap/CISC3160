@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class interpreter {
     // global variable
     public static char y;
+
+    //---------------------------------------------main----------------------------------
     public static void main(String[] args) throws FileNotFoundException {
         //int counter = 0;
         String message = "";
@@ -19,6 +21,9 @@ public class interpreter {
             message = message.concat(scan.nextLine());
             //message.charAt()
         }
+
+        System.out.println(message);
+        
         for(int i = 0; i < message.length(); i++) {
             char character = message.charAt(i);
             newMessage.append(character);
@@ -34,27 +39,41 @@ public class interpreter {
                 
             }
         }
-        //System.out.println(message);
+        System.out.println(message);
         scan.close();
     }
 
+
+    //-----------------------------checking char----------------------------------------
     public static void check(char charScan) {
         /*for(int i = 0; i < charScan.length(); i++) {
             char character = charScan.charAt(i);
         }*/
-        System.out.println(charScan);
+        //System.out.println(charScan);
         if(Character.isDigit(charScan)) {
+            //System.out.println("testing");
+            if(charScan == '0') {
+                if(charScan == y) {
+                    errorMessage();
+                }
+                if(charScan != y) {
+                    y = charScan;
+                }
+            }
+            //y = charScan;   
+        }
+        if(charScan == '%' || charScan == '/' || charScan == '*' || charScan == '+' || charScan == '-') {
             //System.out.println("testing");
             if(charScan == y) {
                 errorMessage();
                 
             }
-            y = charScan;
-
-            
+            y = charScan;   
         }
     }
 
+
+    //--------------------------------error message-------------------------------------
     public static void errorMessage() {
         System.out.println("error!");
         System.exit(0);
@@ -71,5 +90,5 @@ public class interpreter {
     public static void literal() {
 
     }*/
-
+// this program works for x = 001; , x_2 = 0.
 }
