@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class interpreter {
+    // global variable
+    public static char y;
     public static void main(String[] args) throws FileNotFoundException {
         //int counter = 0;
         String message = "";
@@ -21,18 +23,18 @@ public class interpreter {
             char character = message.charAt(i);
             newMessage.append(character);
             if(character == ';') {
-                System.out.println("testing"); // this is working DONT TOUCH
+                // System.out.println("testing"); // this is working DONT TOUCH
                 //line = newMessage;
-                System.out.println("line is: " + newMessage);
-                /*for(int j = 0; j < line.length(); j++) {
-                    char charScan = line.charAt(i);
+                // System.out.println("line is: " + newMessage);
+                for(int j = 0; j < newMessage.length(); j++) {
+                    char charScan = newMessage.charAt(j);
                     check(charScan);
-                }*/
+                }
                 newMessage.setLength(0); // this is working. DONT TOUCH
                 
             }
         }
-        System.out.println(message);
+        //System.out.println(message);
         scan.close();
     }
 
@@ -40,12 +42,23 @@ public class interpreter {
         /*for(int i = 0; i < charScan.length(); i++) {
             char character = charScan.charAt(i);
         }*/
+        System.out.println(charScan);
         if(Character.isDigit(charScan)) {
-            System.out.println("testing");
+            //System.out.println("testing");
+            if(charScan == y) {
+                errorMessage();
+                
+            }
+            y = charScan;
+
+            
         }
     }
 
-
+    public static void errorMessage() {
+        System.out.println("error!");
+        System.exit(0);
+    }
 
     /*public static void Dight() {
 
