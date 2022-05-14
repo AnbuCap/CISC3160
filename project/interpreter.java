@@ -6,30 +6,26 @@ import java.util.Scanner;
 
 public class interpreter {
     // global variable
-    public static char y;
+    public static char prevChar;
+    public static int x, y, z,counter = 0;
 
     //---------------------------------------------main----------------------------------
     public static void main(String[] args) throws FileNotFoundException {
-        //int counter = 0;
         String message = "";
         String messageTwo;
-        //line;
-        //String[] store;
         File file = new File("E://GitHub//CISC3160//project//inputOne.txt");
         Scanner scan = new Scanner(file);
         StringBuilder newMessage = new StringBuilder();
         StringBuilder newMessageTwo = new StringBuilder();
         while(scan.hasNextLine()) {
             message = message.concat(scan.nextLine());
-            //message.charAt()
         }
-
         System.out.println(message);
         
         for(int i = 0; i < message.length(); i++) {
             char character = message.charAt(i);
             if(character == '=') {
-                for(int k = i + 2; k < message.length(); k++) {         
+                for(int k = i + 1; k < message.length(); k++) {         
                     newMessage.append(message.charAt(k));    
                 }
                 messageTwo = newMessage.toString();
@@ -41,7 +37,8 @@ public class interpreter {
                             char charScan = newMessageTwo.charAt(c);
                             check(charScan);
                         }
-                        newMessage.setLength(0); // this is working. DONT TOUCH
+                        newMessageTwo.setLength(0); // this is working. DONT TOUCH
+                        counter++;
                     }
                 }
             }
@@ -53,29 +50,35 @@ public class interpreter {
 
     //-----------------------------checking char----------------------------------------
     public static void check(char charScan) {
-        /*for(int i = 0; i < charScan.length(); i++) {
-            char character = charScan.charAt(i);
-        }*/
-        //System.out.println(charScan);
         if(Character.isDigit(charScan)) {
-            //System.out.println("testing");
             if(charScan == '0') {
-                if(charScan == y) {
+                if(charScan == prevChar) {
                     errorMessage();
                 }
-                if(charScan != y) {
-                    y = charScan;
+                if(charScan != prevChar) {
+                    prevChar = charScan;
                 }
             }
-            //y = charScan;   
+            if(counter == 0) {
+                x = charScan;
+            }
+            else if(counter == 1) {
+                y = charScan;
+            }
+            
+            else if(counter == 3) {
+                calculate(x, y);  
+            }
         }
         if(charScan == '%' || charScan == '/' || charScan == '*' || charScan == '+' || charScan == '-') {
-            //System.out.println("testing");
-            if(charScan == y) {
+            if(charScan == prevChar) {
                 errorMessage();
                 
             }
-            y = charScan;   
+            prevChar = charScan;   
+        }
+        if(charScan == '=' || Character.isLetter(charScan)) {
+            errorMessage();
         }
     }
 
@@ -86,16 +89,7 @@ public class interpreter {
         System.exit(0);
     }
 
-    /*public static void Dight() {
+    public static void calculate(int x, int y) {
 
     }
-
-    public static void nonZeroDight() {
-
-    }
-
-    public static void literal() {
-
-    }*/
-// this program works for x = 001; , x_2 = 0.
 }
